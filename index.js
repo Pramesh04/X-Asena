@@ -1,8 +1,8 @@
 const {
   default: makeWASocket,
-  useSingleFileAuthState,
+  useMultiFileAuthState,
   Browsers,
-} = require("@adiwajshing/baileys");
+} = require("@whiskeysockets/baileys");
 const path = require("path");
 const { Image, Message, Sticker, Video } = require("./lib/Messages");
 let fs = require("fs");
@@ -18,10 +18,9 @@ fs.readdirSync(__dirname + "/assets/database/").forEach((db) => {
   }
 });
 async function Xasena() {
-  const { state, saveState } = useSingleFileAuthState(
-    "./session.json",
-    pino({ level: "silent" })
-  );  
+  const { state, saveCreds } = await useMultiFileAuthState(
+    __dirname + "/session"
+  );
   let conn = makeWASocket({
     auth: state,
     printQRInTerminal: true,
@@ -40,7 +39,7 @@ async function Xasena() {
       console.log("✅ Login Successful!");
       console.log("Syncing Database");
       config.DATABASE.sync();
-      conn.ev.on("creds.update", saveState);
+      conn.ev.on("creds.update", saveCreds);
 
       console.log("⬇️  Installing Plugins...");
       fs.readdirSync(__dirname + "/plugins").forEach((plugin) => {
