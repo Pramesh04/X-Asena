@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@adiwajshing/keyed-db": "^0.2.4",
+    "@adiwajshing/baileys" : "^4.4.0",
     "@hapi/boom": "^10.0.1",
     "@whiskeysockets/baileys": "github:WhiskeySockets/Baileys",
     "browser-id3-writer": "^4.4.0",
