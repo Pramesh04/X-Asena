@@ -18,9 +18,8 @@ fs.readdirSync(__dirname + "/assets/database/").forEach((db) => {
   }
 });
 async function Xasena() {
-  const { state, saveCreds } = await useMultiFileAuthState(
-    __dirname + "/session"
-  );
+const { state, saveCreds } = await useMultiFileAuthState(__dirname + '/auth_info_baileys/')
+
   let conn = makeWASocket({
     auth: state,
     printQRInTerminal: true,
